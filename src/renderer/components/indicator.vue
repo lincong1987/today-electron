@@ -37,7 +37,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '../style/variables.styl'
+@import '../styles/variables.styl'
 
 @keyframes bounce
   0%

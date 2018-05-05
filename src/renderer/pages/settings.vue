@@ -9,20 +9,20 @@
           <img :src="avatarUrl" :alt="username" @click="handleChangeAvatar">
         </div>
         <div class="username">
-          <input-box ref="title" placeholder="Username" :border="false" :classes="usernameCls" :value="innerUsername" :embedded="true" @blur="handleUsernameBlur" @enter="handleUsernameEnter" @input="handleUsernameChange" />
+          <wz-input ref="title" placeholder="Username" :border="false" :classes="usernameCls" :value="innerUsername" :embedded="true" @blur="handleUsernameBlur" @enter="handleUsernameEnter" @input="handleUsernameChange" />
         </div>
-        <divider />
+        <wz-divider />
         <!-- This is the outside container of the sticky footer effect. -->
         <div class="sticky-footer">
           <div class="options-wrapper">
             <div class="options">
               <div class="option border-1px horizontal">
                 <span class="desc">{{ $t('setting.playSound') }}</span>
-                <switcher :state="playSound" @switched="handleTogglePlaySound" />
+                <wz-switch :state="playSound" @switched="handleTogglePlaySound" />
               </div>
               <div class="option border-1px horizontal">
                 <span class="desc">{{ $t('setting.animation') }}</span>
-                <switcher :state="openAni" @switched="handleToggleOpenAni" />
+                <wz-switch :state="openAni" @switched="handleToggleOpenAni" />
               </div>
               <div class="option border-1px horizontal">
                 <span class="desc">{{ $t('setting.language') }}</span>
@@ -47,11 +47,6 @@ import { mapGetters, mapMutations } from 'vuex'
 import { ipcRenderer } from 'electron'
 
 import * as types from '../../shared/event-types'
-import InputBox from '../components/wzel/components/input'
-import Divider from '../components/wzel/components/divider'
-import Switcher from '../components/wzel/components/switcher'
-import ButtonBase from '../components/wzel/components/button'
-import WzSelect from '../components/wzel/components/select'
 import { extractPreferencesMixin } from '../utils/mixins/pref'
 import { getLocale, setLocale } from '../../shared/cache'
 
@@ -69,13 +64,6 @@ const languageOptions = [
 export default {
   name: 'SettingsView',
   mixins: [extractPreferencesMixin],
-  components: {
-    InputBox,
-    Divider,
-    Switcher,
-    ButtonBase,
-    WzSelect
-  },
   data() {
     return {
       innerUsername: this.username,
@@ -168,8 +156,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '../style/mixins.styl';
-@import '../style/variables.styl';
+@import '../styles/mixins.styl';
+@import '../styles/variables.styl';
 
 .settings-view {
   full-screen();

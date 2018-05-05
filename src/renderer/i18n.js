@@ -3,7 +3,7 @@ import I18N from 'vue-i18n'
 
 import { getLocale } from '../shared/cache'
 import locales from '../shared/locales'
-import { use } from './components/wzel/locale'
+import { use } from './components/locale'
 
 Vue.use(I18N)
 

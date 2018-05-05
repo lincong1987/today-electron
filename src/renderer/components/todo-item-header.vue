@@ -20,7 +20,7 @@
         <i class="fa fa-sort"></i>
       </span>
       <div class="dropdown-wrapper">
-        <dropdown ref="sortModeDropdown"
+        <wz-dropdown ref="sortModeDropdown"
                   transition-type="topright">
           <ul class="mode-items">
             <li class="mode-item"
@@ -31,7 +31,7 @@
               {{ $t(`message.mode_${mode.mode}`) }}
             </li>
           </ul>
-        </dropdown>
+        </wz-dropdown>
       </div>
     </div>
     <transition name="fade">
@@ -43,10 +43,10 @@
           {{ $t('message.suggestion') }}
         </div>
         <div class="dropdown-wrapper">
-          <dropdown ref="suggestionDropdown"
+          <wz-dropdown ref="suggestionDropdown"
                     transition-type="topright">
             <suggestion-view ref="suggestion" />
-          </dropdown>
+          </wz-dropdown>
         </div>
       </div>
     </transition>
@@ -57,8 +57,7 @@
 import { mapGetters, mapMutations } from 'vuex'
 
 import SuggestionView from '../pages/suggestion'
-import Dropdown from './wzel/components/dropdown'
-import { getFormattedDate } from './wzel/utils/datetime'
+import { getFormattedDate } from './utils/datetime'
 
 const sortModes = [
   { mode: 'none' },
@@ -93,8 +92,8 @@ const i18n = {
 }
 
 export default {
-  name: 'TodoHeader',
-  components: { Dropdown, SuggestionView },
+  name: 'todo-header',
+  components: { SuggestionView },
   i18n,
   data() {
     return {
@@ -145,8 +144,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '../style/mixins.styl'
-@import '../style/variables.styl'
+@import '../styles/mixins.styl'
+@import '../styles/variables.styl'
 
 .item-header-component
   position relative

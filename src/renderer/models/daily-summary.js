@@ -1,5 +1,5 @@
 import { generateUUID } from '../utils/uuid'
-import { clearHours } from '../components/wzel/utils/datetime'
+import { clearHours } from '../components/utils/datetime'
 
 export default class DailySummary {
   constructor({ date, cItems, uItems }) {

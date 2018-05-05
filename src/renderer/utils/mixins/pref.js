@@ -4,9 +4,7 @@ import { mapGetters } from 'vuex'
 export const extractPreferencesMixin = {
   computed: {
     avatarUrl() {
-      return !this.avatarCode || this.avatarCode === ''
-        ? 'static/images/default.jpeg'
-        : this.avatarCode
+      return this.avatarCode || 'static/images/default.jpeg'
     },
     ...mapGetters([
       'avatarCode',

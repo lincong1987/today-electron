@@ -82,5 +82,8 @@ export default {
   calendar: {
     completedTodos: 'Completed ToDos: ',
     uncompletedTodos: 'Uncompleted ToDos: '
+  },
+  blankView: {
+    empty: 'Empty'
   }
 }

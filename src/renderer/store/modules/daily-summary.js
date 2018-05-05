@@ -5,7 +5,7 @@ import {
   clearHours,
   getToday,
   ONE_DAY
-} from '../../components/wzel/utils/datetime'
+} from '../../components/utils/datetime'
 import {
   loadDailySummaries,
   loadLastSummaryDate,

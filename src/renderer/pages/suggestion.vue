@@ -1,5 +1,6 @@
 <template>
   <div class="suggestion-view">
+    <!-- header -->
     <div class="header">
       <h1>
         {{ $t('suggestion.suggestion') }}
@@ -8,17 +9,22 @@
         {{ $t('suggestion.desc') }}
       </p>
     </div>
+    <!-- suggetions -->
     <template v-if="suggestedTodo.length">
       <transition-group name="height"
                         class="suggestion-list">
         <li class="suggestion-item"
             v-for="(suggestion, index) in suggestedTodo"
             :key="index">
-          <span class="title">{{ suggestion.title }}</span>
-          <span class="list">{{ $t('suggestion.in') }} {{ listNameFor(suggestion) }}</span>
+          <span class="title">
+            {{ suggestion.title }}
+          </span>
+          <span class="list">
+            {{ $t('suggestion.in') }} {{ listNameFor(suggestion) }}
+          </span>
           <wz-button :text="$t('suggestion.add')"
                      size="small"
-                     @click="acceptSuggestion(suggestion)" />
+                     @click="_acceptSuggestion(suggestion)" />
         </li>
       </transition-group>
     </template>
@@ -35,8 +41,7 @@ import {
   getCurrentDatetime,
   getToday,
   ONE_DAY
-} from '../components/wzel/utils/datetime'
-import WzButton from '../components/wzel/components/button'
+} from '../components/utils/datetime'
 import Blank from '../pages/blank'
 
 /* eslint-disable no-unused-vars */
@@ -45,6 +50,16 @@ const getSuggestedTodos = function(todos) {
 
   todos.forEach(todo => {
     const untilDuedate = clearHours(todo.dueDatetime) - getToday()
+
+    if (
+      todo.completedFlag === true ||
+      (!todo.dueDatetime && !todo.planDatetime) ||
+      (todo.planDatetime && clearHours(todo.planDatetime) === getToday())
+    ) {
+      return
+    }
+
+    // there are different situations
     if (
       todo.completedFlag !== true &&
       todo.dueDatetime &&
@@ -60,8 +75,8 @@ const getSuggestedTodos = function(todos) {
 }
 
 export default {
-  name: 'Suggestion',
-  components: { WzButton, Blank },
+  name: 'suggestion',
+  components: { Blank },
   data: () => ({
     suggestedTodo: []
   }),
@@ -69,7 +84,7 @@ export default {
     ...mapGetters(['todoItems', 'listItems'])
   },
   methods: {
-    acceptSuggestion(suggestion) {
+    _acceptSuggestion(suggestion) {
       this.setPlanDatetime({
         item: suggestion,
         date: getCurrentDatetime()
@@ -102,7 +117,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '../style/variables.styl'
+@import '../styles/variables.styl'
 
 .suggestion-view
   display flex

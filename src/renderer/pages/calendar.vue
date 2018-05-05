@@ -1,27 +1,20 @@
 <template>
   <div class="calendar-view">
     <div class="calendar-layout-wrapper">
-      <calendar-layout :month="month"
+      <wz-calendar-carousel :month="month"
                        :year="year"
-                       @month-change="handleMonthChange"></calendar-layout>
+                            @month-change="handleMonthChange"></wz-calendar-carousel>
     </div>
     <div class="calendar-wrapper">
-      <calendar :month="month"
-                :year="year"></calendar>
+      <wz-calendar :month="month"
+                :year="year"></wz-calendar>
     </div>
   </div>
 </template>
 
 <script>
-  import Calendar from '../components/wzel/components/calendar/index'
-  import CalendarLayout from '../components/wzel/components/calendar/calendar-carousel'
-
   export default {
     name: 'CalendarView',
-    components: {
-      Calendar,
-      CalendarLayout
-    },
     data () {
       return {
         month: (new Date()).getMonth(),
@@ -45,8 +38,8 @@
 </script>
 
 <style lang="stylus" scoped>
-  @import '../style/mixins.styl';
-  @import '../style/variables.styl';
+  @import '../styles/mixins.styl';
+  @import '../styles/variables.styl';
 
   .calendar-view {
     display: flex;

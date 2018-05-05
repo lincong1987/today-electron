@@ -3,7 +3,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import i18n from './i18n'
-import wzel from './components/wzel/index'
+import wzel from './components/index'
 
 import { dateFormatter } from './utils/filters/dateformatter'
 import { savePreferences } from './store/modules/preference'

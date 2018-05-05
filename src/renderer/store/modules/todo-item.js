@@ -5,7 +5,7 @@ import {
   clearHours,
   getCurrentDatetime,
   getToday
-} from '../../components/wzel/utils/datetime'
+} from '../../components/utils/datetime'
 import { findItemIndexByKey } from '../../utils/array'
 import { loadTodoItems, storeTodoItems } from '../../../shared/cache'
 import { createOrUpdateNotification, deleteNotification } from '../../ipc'

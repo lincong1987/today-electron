@@ -81,5 +81,8 @@ export default {
   calendar: {
     completedTodos: '已完成的任务',
     uncompletedTodos: '未完成的任务'
+  },
+  blankView: {
+    empty: '空'
   }
 }

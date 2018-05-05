@@ -43,7 +43,7 @@ import { ipcRenderer } from 'electron'
 import Draggable from 'vuedraggable'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
-import clickoutside from '../components/wzel/directives/clickoutside'
+import clickoutside from './directives/clickoutside'
 
 import * as types from '../../shared/event-types'
 import BlankView from '../pages/blank'
@@ -206,7 +206,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '../style/mixins.styl'
+@import '../styles/mixins.styl'
 
 .todo-item-view
   position relative

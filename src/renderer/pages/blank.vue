@@ -1,6 +1,6 @@
 <template>
   <div class="blank-view">
-    <div class="logo">
+    <div class="info">
       {{ info }}
     </div>
   </div>
@@ -8,21 +8,7 @@
 
 <script>
 export default {
-  name: 'BlankView',
-  i18n: {
-    messages: {
-      en: {
-        message: {
-          empty: 'Empty'
-        }
-      },
-      zh: {
-        message: {
-          empty: '空'
-        }
-      }
-    }
-  },
+  name: 'blank-view',
   props: {
     info: {
       type: String,
@@ -32,7 +18,7 @@ export default {
   computed: {
     displayed() {
       if (this.info) return this.info
-      return this.$t('message.empty')
+      return this.$t('blankView.empty')
     }
   }
 }
@@ -47,9 +33,7 @@ export default {
   flex-direction column
   justify-content center
 
-  .logo
-    margin auto
-    width 100px
+  .info
     text-align center
     color #d8d8d8
 </style>

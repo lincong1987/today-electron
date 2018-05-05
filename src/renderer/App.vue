@@ -14,7 +14,7 @@ import nodeSchedule from 'node-schedule'
 import 'font-awesome/css/font-awesome.css'
 
 import * as types from '../shared/event-types'
-import { getToday } from './components/wzel/utils/datetime'
+import { getToday } from './components/utils/datetime'
 
 export default {
   name: 'today',
@@ -67,8 +67,8 @@ export default {
 </script>
 
 <style lang="stylus">
-@import 'style/index.styl'
-@import 'style/mixins.styl'
+@import './styles/index.styl'
+@import './styles/mixins.styl'
 
 #app
   no-flex-full-screen()

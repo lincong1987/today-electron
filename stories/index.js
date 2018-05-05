@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/vue'
 
-import WzDatePicker from '../src/renderer/components/wzel/components/date-picker'
+import WzDatePicker from '../src/renderer/components/date-picker'
 
 storiesOf('Welcome').add('WZEL', () => ({
   template:

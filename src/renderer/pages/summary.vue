@@ -52,8 +52,8 @@
 </script>
 
 <style lang="stylus" scoped>
-  @import '../style/mixins.styl';
-  @import '../style/variables.styl';
+  @import '../styles/mixins.styl';
+  @import '../styles/variables.styl';
 
   .summary-view {
     width: 100%;

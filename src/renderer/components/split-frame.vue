@@ -27,8 +27,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '../style/variables.styl'
-@import '../style/mixins.styl'
+@import '../styles/variables.styl'
+@import '../styles/mixins.styl'
 
 .split-frame-base
   full-screen()

@@ -23,12 +23,12 @@
                  @click="_toggleComplete">
               <indicator :flag="detailedTodoItem.completeFlag" />
             </div>
-            <input-box class="title"
-                       :border="false"
-                       :disabled="detailedTodoItem && detailedTodoItem.completeFlag"
-                       :classes="headerClasses"
-                       :value="this.detailedTodoItem.title"
-                       @enter="_handleResetItemTitle" />
+            <wz-input class="title"
+                      :border="false"
+                      :disabled="detailedTodoItem && detailedTodoItem.completeFlag"
+                      :classes="headerClasses"
+                      :value="this.detailedTodoItem.title"
+                      @enter="_handleResetItemTitle" />
           </div>
           <div class="content-body">
             <div class="picker-container">
@@ -48,10 +48,10 @@
                               @date-changed="_handlePlanDateChanged" />
             </div>
             <div class="desc-container">
-              <input-box :placeholder="$t('detail.description')"
-                         type="textarea"
-                         :value="detailedTodoItem.desc"
-                         @input="_handleDescInput" />
+              <wz-input :placeholder="$t('detail.description')"
+                        type="textarea"
+                        :value="detailedTodoItem.desc"
+                        @input="_handleDescInput" />
             </div>
           </div>
         </div>
@@ -63,17 +63,13 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 
-import WzDatePicker from '../components/wzel/components/date-picker/index'
 import Indicator from '../components/indicator'
-import InputBox from '../components/wzel/components/input'
-import { clearHours, getToday } from '../components/wzel/utils/datetime.js'
+import { clearHours, getToday } from '../utils/datetime.js'
 
 export default {
   name: 'DetailView',
   components: {
-    WzDatePicker,
-    Indicator,
-    InputBox
+    Indicator
   },
   computed: {
     desc() {
@@ -236,8 +232,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '../style/mixins.styl'
-@import '../style/variables.styl'
+@import '../styles/mixins.styl'
+@import '../styles/variables.styl'
 
 fix-button($color = $red-color)
   position absolute

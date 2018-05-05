@@ -1,5 +1,5 @@
 import { generateUUID } from '../utils/uuid'
-import { getCurrentDatetime } from '../components/wzel/utils/datetime'
+import { getCurrentDatetime } from '../components/utils/datetime'
 
 export default class ListItem {
   constructor({ title }) {

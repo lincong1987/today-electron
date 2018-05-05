@@ -59,8 +59,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '../style/mixins.styl'
-@import '../style/variables.styl'
+@import '../styles/mixins.styl'
+@import '../styles/variables.styl'
 
 .user-info-co
   width 100%

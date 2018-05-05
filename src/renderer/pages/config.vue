@@ -11,11 +11,11 @@
               Before you start, please tell us something about yourself.
             </p>
             <p class="input-container">
-              <input-box v-model="username"
+              <wz-input v-model="username"
                          placeholder="Username"
                          :embedded="true" />
             </p>
-            <button-base type="primary"
+            <wz-button type="primary"
                          text="Start"
                          :hasValue="true"
                          :value="username"
@@ -30,14 +30,11 @@
 
 <script>
 import { mapActions } from 'vuex'
-
-import ButtonBase from '../components/wzel/components/button'
 import SplitFrame from '../components/split-frame'
-import InputBox from '../components/wzel/components/input'
 
 export default {
   name: 'config-view',
-  props: {},
+  components: { SplitFrame },
   data() {
     return {
       username: ''
@@ -62,18 +59,13 @@ export default {
       })
     },
     ...mapActions(['initializeApplication'])
-  },
-  components: {
-    ButtonBase,
-    SplitFrame,
-    InputBox
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-@import '../style/mixins.styl';
-@import '../style/variables.styl';
+@import '../styles/mixins.styl';
+@import '../styles/variables.styl';
 
 .config-view {
   transition-fade();

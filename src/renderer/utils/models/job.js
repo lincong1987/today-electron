@@ -1,4 +1,4 @@
-import { generateUUID } from '../utils/uuid'
+import { generateUUID } from '../uuid'
 
 export default class NotificationJob {
   constructor({ todoUUID, datetime }) {

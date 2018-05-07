@@ -1,4 +1,4 @@
-import { on } from '../utils/index'
+import { on } from '../index'
 
 const nodeList = []
 const ctx = '@@clickoutsideContext'

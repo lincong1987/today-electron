@@ -1,10 +1,10 @@
 <template>
-  <div class="weather-component"></div>
+  <div class="wz-weather-component"></div>
 </template>
 
 <script>
 export default {
-  name: 'wz-weather-component'
+  name: 'wz-weather'
 }
 </script>
 

@@ -14,7 +14,7 @@
                      v-for="listItem in draggableListItems"
                      :item="listItem"
                      :key="listItem._id"
-                     @contextmenu="_handleContextMenu"
+                     @contextmenu="_handleContextMenu($event, listItem)"
                      @select="handleSelectListItem" />
         </transition-group>
       </draggable>
@@ -101,17 +101,16 @@ export default {
         }
       })
     },
-    _handleContextMenu(listItem, { x, y }) {
-      this.$contextMenu({
+    _handleContextMenu(event, listItem) {
+      this.$context({
         commands,
-        pos: { x, y },
-        callback: hook => {
-          if (hook === 'delete') {
-            this._deleteListItem(listItem)
-          }
-          if (hook === 'rename') {
-            this._renameListItem(listItem)
-          }
+        event
+      }).then(hook => {
+        if (hook === 'delete') {
+          this._deleteListItem(listItem)
+        }
+        if (hook === 'rename') {
+          this._renameListItem(listItem)
         }
       })
     },
@@ -135,7 +134,7 @@ export default {
           this.deleteTodoItemByListUUID(listItem._id)
           this.deleteListItem(listItem)
           this.$message({
-            desc: this.$t('listDeleted'),
+            message: this.$t('listDeleted'),
             type: 'info'
           })
         }

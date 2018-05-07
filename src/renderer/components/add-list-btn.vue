@@ -33,7 +33,6 @@ export default {
   &:hover
     background $background-color-light-grey
 
-    // no-border();
     i
       color $text-clor-dark-grey
 

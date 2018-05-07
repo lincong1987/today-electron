@@ -1,4 +1,4 @@
-import ListItem from '../../models/list-item'
+import ListItem from '../../utils/models/list-item'
 
 import { findItemIndexByKey } from '../../utils/array'
 import { loadListItems, storeListItems } from '../../../shared/cache'

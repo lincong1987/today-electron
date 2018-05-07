@@ -1,4 +1,4 @@
-import { getToday } from '../../components/utils/datetime'
+import { getToday } from '../../utils/datetime'
 import { loadPreferences, storePreferences } from '../../../shared/cache'
 
 export const savePreferences = function() {

@@ -1,5 +1,5 @@
-import { generateUUID } from '../utils/uuid'
-import { clearHours } from '../components/utils/datetime'
+import { generateUUID } from '../uuid'
+import { clearHours } from '../datetime'
 
 export default class DailySummary {
   constructor({ date, cItems, uItems }) {

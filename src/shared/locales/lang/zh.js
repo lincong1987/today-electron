@@ -76,7 +76,9 @@ export default {
     desc: '拿不准现在该做什么？请考虑我们的建议。',
     in: '位于',
     add: '添加',
-    empty: '没有推荐'
+    empty: '没有推荐',
+    overdue: '已经过期',
+    almostDue: '快要到期的任务'
   },
   calendar: {
     completedTodos: '已完成的任务',

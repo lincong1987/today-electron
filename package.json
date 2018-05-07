@@ -1,7 +1,7 @@
 {
   "name": "today",
-  "version": "0.0.2",
-  "author": "Wendell <wendzhue@gmail.com>",
+  "version": "0.0.3-alpha",
+  "author": "Wendell Hu",
   "description": "An app helps you to rememeber things and do them quiet in time.",
   "license": "MIT",
   "main": "./dist/electron/main.js",
@@ -16,9 +16,7 @@
     "pack": "npm run pack:main && npm run pack:renderer",
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
-    "postinstall": "npm run lint:fix",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "postinstall": "npm run lint:fix"
   },
   "build": {
     "productName": "Today",
@@ -65,7 +63,8 @@
     "vue-i18n": "^7.4.2",
     "vue-router": "^2.5.3",
     "vuedraggable": "^2.14.1",
-    "vuex": "^2.3.1"
+    "vuex": "^2.3.1",
+    "wzel": "0.0.1-alpha2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

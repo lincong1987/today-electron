@@ -1,11 +1,11 @@
-import TodoItem from '../../models/todo-item'
+import TodoItem from '../../utils/models/todo-item'
 import ListItemStore from './list-item'
 
 import {
   clearHours,
   getCurrentDatetime,
   getToday
-} from '../../components/utils/datetime'
+} from '../../utils/datetime'
 import { findItemIndexByKey } from '../../utils/array'
 import { loadTodoItems, storeTodoItems } from '../../../shared/cache'
 import { createOrUpdateNotification, deleteNotification } from '../../ipc'

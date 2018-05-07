@@ -1,5 +1,5 @@
-import { generateUUID } from '../utils/uuid'
-import { getCurrentDatetime } from '../components/utils/datetime'
+import { generateUUID } from '../uuid'
+import { getCurrentDatetime } from '../datetime'
 
 export default class ListItem {
   constructor({ title }) {

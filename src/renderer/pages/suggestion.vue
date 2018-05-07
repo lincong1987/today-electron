@@ -10,11 +10,16 @@
       </p>
     </div>
     <!-- suggetions -->
-    <template v-if="suggestedTodo.length">
+    <template v-if="overdue.length">
+
       <transition-group name="height"
                         class="suggestion-list">
+        <li class="indicator"
+            key="indicator">
+          {{ $t('suggestion.overdue') }}
+        </li>
         <li class="suggestion-item"
-            v-for="(suggestion, index) in suggestedTodo"
+            v-for="(suggestion, index) in overdue"
             :key="index">
           <span class="title">
             {{ suggestion.title }}
@@ -28,7 +33,29 @@
         </li>
       </transition-group>
     </template>
-    <blank v-else
+    <template v-if="almostDue.length">
+      <transition-group name="height"
+                        class="suggestion-list">
+        <li class="indicator"
+            key="indicator">
+          {{ $t('suggestion.almostDue') }}
+        </li>
+        <li class="suggestion-item"
+            v-for="(suggestion, index) in almostDue"
+            :key="index">
+          <span class="title">
+            {{ suggestion.title }}
+          </span>
+          <span class="list">
+            {{ $t('suggestion.in') }} {{ listNameFor(suggestion) }}
+          </span>
+          <wz-button :text="$t('suggestion.add')"
+                     size="small"
+                     @click="_acceptSuggestion(suggestion)" />
+        </li>
+      </transition-group>
+    </template>
+    <blank v-if="!almostDue.length && !overdue.length"
            :info="$t('suggestion.empty')"></blank>
   </div>
 </template>
@@ -41,44 +68,17 @@ import {
   getCurrentDatetime,
   getToday,
   ONE_DAY
-} from '../components/utils/datetime'
+} from '../utils/datetime'
 import Blank from '../pages/blank'
-
-/* eslint-disable no-unused-vars */
-const getSuggestedTodos = function(todos) {
-  let ret = []
-
-  todos.forEach(todo => {
-    const untilDuedate = clearHours(todo.dueDatetime) - getToday()
-
-    if (
-      todo.completedFlag === true ||
-      (!todo.dueDatetime && !todo.planDatetime) ||
-      (todo.planDatetime && clearHours(todo.planDatetime) === getToday())
-    ) {
-      return
-    }
-
-    // there are different situations
-    if (
-      todo.completedFlag !== true &&
-      todo.dueDatetime &&
-      untilDuedate <= ONE_DAY * 2 &&
-      untilDuedate > 0 &&
-      !todo.planDatetime
-    ) {
-      ret.push(todo)
-    }
-  })
-
-  return ret
-}
 
 export default {
   name: 'suggestion',
   components: { Blank },
   data: () => ({
-    suggestedTodo: []
+    // there are different situations
+    // situation 1 - task is supposed to complete in two days
+    overdue: [],
+    almostDue: []
   }),
   computed: {
     ...mapGetters(['todoItems', 'listItems'])
@@ -107,7 +107,46 @@ export default {
       return title
     },
     refresh() {
-      this.suggestedTodo = getSuggestedTodos(this.todoItems)
+      this.getSuggestedTodos(this.todoItems)
+    },
+    getSuggestedTodos(todos) {
+      const overdue = []
+      const almostDue = []
+
+      todos.forEach(todo => {
+        const today = getToday()
+        const untilDuedate = clearHours(todo.dueDatetime) - today
+
+        if (
+          todo.completedFlag === true ||
+          (!todo.dueDatetime && !todo.planDatetime) ||
+          (todo.planDatetime && clearHours(todo.planDatetime) === today)
+        ) {
+          return
+        }
+
+        if (todo.planDatetime && todo.planDatetime < today) {
+          overdue.push(todo)
+          return
+        }
+
+        if (todo.dueDatetime && todo.dueDatetime < today) {
+          overdue.push(todo)
+          return
+        }
+
+        if (
+          todo.dueDatetime &&
+          untilDuedate <= ONE_DAY * 2 &&
+          untilDuedate > 0 &&
+          !todo.planDatetime
+        ) {
+          almostDue.push(todo)
+        }
+      })
+
+      this.overdue = overdue
+      this.almostDue = almostDue
     },
     ...mapMutations({
       setPlanDatetime: 'SET_PLAN_DATETIME'
@@ -141,6 +180,14 @@ export default {
   .suggestion-list
     flex 1
     margin-top 8px
+    list-style none
+
+    .indicator
+      margin-top 12px
+      margin-bottom -8px
+      line-height 28px
+      height 28px
+      font-size 13px
 
     .suggestion-item
       display flex

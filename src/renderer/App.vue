@@ -7,20 +7,30 @@
 </template>
 
 <script>
+/**
+ * Application lifecycle: initialization, tearind-down, scheduling jobs.
+ */
+
 import { ipcRenderer } from 'electron'
 import { mapActions, mapMutations, mapGetters } from 'vuex'
 import nodeSchedule from 'node-schedule'
 
 import 'font-awesome/css/font-awesome.css'
 
+import { savePreferences } from './store/modules/preference'
+import { saveTodoItems } from './store/modules/todo-item'
+import { saveListItems } from './store/modules/list-item'
+import { saveDailySummaries } from './store/modules/daily-summary'
+
 import * as types from '../shared/event-types'
-import { getToday } from './components/utils/datetime'
+import { getToday } from './utils/datetime'
 
 export default {
   name: 'today',
   created() {
     this._bindIpc()
     this._passDayJobs()
+    this._bindUnloadActsions()
   },
   methods: {
     _bindIpc() {
@@ -42,7 +52,7 @@ export default {
       ipcRenderer.on(types.NOTIFICATION, ({ title, text }) => {
         this.$noti({
           title,
-          desc: text,
+          message: text,
           type: 'info'
         })
       })
@@ -56,6 +66,14 @@ export default {
         this.setToday(getToday())
         this.doSummary()
       })
+    },
+    _bindUnloadActsions() {
+      window.onbeforeunload = e => {
+        saveDailySummaries()
+        saveTodoItems()
+        saveListItems()
+        savePreferences()
+      }
     },
     ...mapGetters(['todoItems']),
     ...mapActions(['doSummary']),

@@ -2,7 +2,7 @@
   <li class="list-item-co border-1px horizontal"
       :class="{'current': currentListItem._id === item._id}"
       @click="handleClick"
-      @contextmenu.prevent="handleContextMenu">
+      @contextmenu="handleContextMenu">
     <div class="icon-wrapper">
       <i class="fa fa-fw fa-tasks"></i>
     </div>
@@ -30,10 +30,7 @@ export default {
       this.$emit('select', this.item)
     },
     handleContextMenu(event) {
-      this.$emit('contextmenu', this.item, {
-        x: event.pageX,
-        y: event.pageY
-      })
+      this.$emit('contextmenu', event)
     }
   }
 }

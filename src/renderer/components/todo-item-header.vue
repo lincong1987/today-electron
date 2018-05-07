@@ -21,7 +21,7 @@
       </span>
       <div class="dropdown-wrapper">
         <wz-dropdown ref="sortModeDropdown"
-                  transition-type="topright">
+                     transition-type="topright">
           <ul class="mode-items">
             <li class="mode-item"
                 :class="{'current': sortMode === mode.mode}"
@@ -44,7 +44,7 @@
         </div>
         <div class="dropdown-wrapper">
           <wz-dropdown ref="suggestionDropdown"
-                    transition-type="topright">
+                       transition-type="topright">
             <suggestion-view ref="suggestion" />
           </wz-dropdown>
         </div>
@@ -57,7 +57,7 @@
 import { mapGetters, mapMutations } from 'vuex'
 
 import SuggestionView from '../pages/suggestion'
-import { getFormattedDate } from './utils/datetime'
+import { getFormattedDate } from '../utils/datetime'
 
 const sortModes = [
   { mode: 'none' },

@@ -1,11 +1,7 @@
-import DailySummary from '../../models/daily-summary'
+import DailySummary from '../../utils/models/daily-summary'
 import TodoItemStore from './todo-item'
 import PreferencesStore from './preference'
-import {
-  clearHours,
-  getToday,
-  ONE_DAY
-} from '../../components/utils/datetime'
+import { clearHours, getToday, ONE_DAY } from '../../utils/datetime'
 import {
   loadDailySummaries,
   loadLastSummaryDate,

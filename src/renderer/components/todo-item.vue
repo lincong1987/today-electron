@@ -98,10 +98,7 @@ export default {
       this.$emit('shift-click', this.item)
     },
     _handleContextMenu(event) {
-      this.$emit('contextmenu', this.item, {
-        x: event.pageX,
-        y: event.pageY
-      })
+      this.$emit('contextmenu', event)
     },
     _handleToggle() {
       this.toggleComplete(this.item)

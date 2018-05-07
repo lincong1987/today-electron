@@ -194,7 +194,7 @@ export default {
       if (dueDatetime && planDatetime && dueDatetime < planDatetime) {
         this.$message({
           type: 'warn',
-          desc: this.$t('detail.alertOverdue')
+          message: this.$t('detail.alertOverdue')
         })
       }
     },
@@ -203,14 +203,14 @@ export default {
       if (!item.planDatetime) {
         this.$message({
           type: 'warn',
-          desc: this.$t('detail.hasNoPlandate')
+          message: this.$t('detail.hasNoPlandate')
         })
         return
       }
       const flag = !item.notify
       this.$message({
         type: 'info',
-        desc: flag
+        message: flag
           ? this.$t('detail.willNotify')
           : this.$t('detail.cancelNotify')
       })

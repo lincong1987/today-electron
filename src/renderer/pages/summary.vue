@@ -3,7 +3,8 @@
     <div class="summary-view">
       <split-frame>
         <user-info-view slot="left-panel"></user-info-view>
-        <calendar-view slot="right-panel"></calendar-view>
+        <wz-calendar slot="right-panel"
+                     :custom="true"></wz-calendar>
       </split-frame>
       <div class="quit"
            @click="handleQuitClick">
@@ -14,78 +15,73 @@
 </template>
 
 <script>
-  import { mapActions, mapGetters } from 'vuex'
+import Vue from 'vue'
+import { mapActions, mapGetters } from 'vuex'
+import UserInfoView from './user-info.vue'
+import SplitFrame from '../components/split-frame.vue'
 
-  import CalendarView from './calendar.vue'
-  import UserInfoView from './user-info.vue'
+import CalendarCell from '../components/calendar-cell'
 
-  import SplitFrame from '../components/split-frame.vue'
+Vue.component('wz-calendar-cell', CalendarCell)
 
-  export default {
-    name: 'summary-view',
-    components: {
-      CalendarView,
-      SplitFrame,
-      UserInfoView
+export default {
+  name: 'summary-view',
+  components: {
+    SplitFrame,
+    UserInfoView
+  },
+  computed: {
+    ...mapGetters(['currentListItem', 'currentSpecialListItemTitle'])
+  },
+  methods: {
+    handleQuitClick() {
+      let nextRoute
+      if (this.currentSpecialListItemTitle) {
+        nextRoute = `/main/${this.currentSpecialListItemTitle}`
+      } else {
+        nextRoute = `/main/${this.currentListItem._id}`
+      }
+      this.$router.push({
+        path: nextRoute
+      })
     },
-    computed: {
-      ...mapGetters([ 'currentListItem', 'currentSpecialListItemTitle' ])
-    },
-    methods: {
-      handleQuitClick () {
-        let nextRoute
-        if (this.currentSpecialListItemTitle) {
-          nextRoute = `/main/${this.currentSpecialListItemTitle}`
-        } else {
-          nextRoute = `/main/${this.currentListItem._id}`
-        }
-        this.$router.push({
-          path: nextRoute
-        })
-      },
-      ...mapActions([ 'doSummary' ])
-    },
-    mounted () {
-      this.doSummary()
-    }
+    ...mapActions(['doSummary'])
+  },
+  mounted() {
+    this.doSummary()
   }
+}
 </script>
 
 <style lang="stylus" scoped>
-  @import '../styles/mixins.styl';
-  @import '../styles/variables.styl';
+@import '../styles/mixins.styl'
+@import '../styles/variables.styl'
 
-  .summary-view {
-    width: 100%;
-    height: 100%;
-    background: white;
-    position: relative;
+.summary-view
+  width 100%
+  height 100%
+  background white
+  position relative
 
-    &.slide-enter-active, &.slide-leave-active {
-      transition: 0.2s all;
-    }
+  &.slide-enter-active, &.slide-leave-active
+    transition 0.2s all
 
-    &.slide-enter-active {
-      transition-delay: 0.2s;
-    }
+  &.slide-enter-active
+    transition-delay 0.2s
 
-    &.slide-enter, &.slide-leave-to {
-      transform: translate3d(0, 15%, 0);
-      opacity: 0;
-    }
+  &.slide-enter, &.slide-leave-to
+    transform translate3d(0, 15%, 0)
+    opacity 0
 
-    .quit {
-      position: absolute;
-      left: 20px;
-      top: 14px;
-      padding: 8px;
-      transition: all 0.2s;
-      color: $text-color-dark-grey;
+  .quit
+    position absolute
+    left 20px
+    top 14px
+    padding 8px
+    transition all 0.2s
+    color $text-color-dark-grey
 
-      &:hover {
-        color: $red-color;
-        transform: translateY(-2px);
-      }
-    }
-  }
+    &:hover
+      color $red-color
+      transform translateY(-2px)
 </style>

@@ -77,7 +77,9 @@ export default {
     desc: `Don't know what to do first? Please consider about our suggestions.`,
     in: 'in',
     add: 'Add',
-    empty: 'No suggestions'
+    empty: 'No suggestions',
+    overdue: 'Already overdue',
+    almostDue: 'Approaching Deadline'
   },
   calendar: {
     completedTodos: 'Completed ToDos: ',

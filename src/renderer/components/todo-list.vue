@@ -20,7 +20,7 @@
                          :selected="_checkSelectedFor(index)"
                          @click="_handleSelected"
                          @shift-click="_handleShiftSelected"
-                         @contextmenu="_handleContextMenu" />
+                         @contextmenu="_handleContextMenu($event, item)" />
             </transition-group>
           </draggable>
         </div>
@@ -43,7 +43,7 @@ import { ipcRenderer } from 'electron'
 import Draggable from 'vuedraggable'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
-import clickoutside from './directives/clickoutside'
+import clickoutside from '../utils/directives/clickoutside'
 
 import * as types from '../../shared/event-types'
 import BlankView from '../pages/blank'
@@ -92,7 +92,7 @@ export default {
         if (this.sortMode !== 'none') {
           this.$message({
             type: 'warn',
-            desc: this.$t('todoList.sortByDefault')
+            message: this.$t('todoList.sortByDefault')
           })
         }
         this.setSortMode('none')
@@ -121,7 +121,7 @@ export default {
         }
       })
     },
-    _handleContextMenu(todoItem, { x, y }) {
+    _handleContextMenu(event, todoItem) {
       const range = this.selectedRange
       if (range.start === -1) {
         const index = this.currentTodoItems.indexOf(todoItem)
@@ -131,19 +131,18 @@ export default {
       // remember the indexes here, because when a context menu item
       // is clicked, _resetRange() would be called before the callback
       const { start, end } = range
-      this.$contextMenu({
+      this.$context({
         commands,
-        pos: { x, y },
-        callback: hook => {
-          if (hook === 'today') {
-            this.setPlanDatetime({
-              item: todoItem,
-              date: new Date()
-            })
-          }
-          if (hook === 'delete') {
-            this._deleteTodoItemInRange(start, end)
-          }
+        event
+      }).then(hook => {
+        if (hook === 'today') {
+          this.setPlanDatetime({
+            item: todoItem,
+            date: new Date()
+          })
+        }
+        if (hook === 'delete') {
+          this._deleteTodoItemInRange(start, end)
         }
       })
     },
